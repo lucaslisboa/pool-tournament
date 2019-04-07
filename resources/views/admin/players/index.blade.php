@@ -2,9 +2,10 @@
 
 @section('content')
     <pagina tamanho="10">
-        <painel titulo="List of Players" cor="blue">
-
+        <painel titulo="Lista de Jogadores" cor="blue">
             <migalhas v-bind:lista="{{ $listaMigalhas }}"></migalhas>
+
+            <modal-link tipo="link" nome="meuModalTeste" titulo="Criar" css=""></modal-link>
 
             <tabela-lista
                     v-bind:titulos="['#','Nome']"
@@ -18,4 +19,21 @@
             ></tabela-lista>
         </painel>
     </pagina>
+
+
+    <modal nome="meuModalTeste">
+
+        <painel titulo="Adicionar">
+            <formulario css="" action="#" method="put" enctype="multipart/form-data" token="12345">
+
+                <div class="form-group">
+                    <label for="nome">Nome</label>
+                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome">
+                </div>
+                <button class="btn btn-info">Adicionar</button>
+
+            </formulario>
+        </painel>
+
+    </modal>
 @endsection
