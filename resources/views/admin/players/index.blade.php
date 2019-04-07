@@ -20,8 +20,8 @@
     </pagina>
 
 
-    <modal nome="adicionar" titulo="Adicionar">
-        <formulario id="formAdicionar" css="" action="#" method="post" enctype="multipart/form-data" token="">
+    <modal nome="adicionar" titulo="Adicionar Novo Jogador">
+        <formulario id="formAdicionar" css="" action="{{ route('players.store') }}" method="post" enctype="multipart/form-data" token="{{ csrf_token() }}">
 
             <div class="form-group">
                 <label for="nome">Nome</label>
@@ -34,8 +34,8 @@
         </span>
     </modal>
 
-    <modal nome="editar" titulo="Editar">
-        <formulario id="formEditar" css="" action="#" method="put" enctype="multipart/form-data" token="12345">
+    <modal nome="editar" titulo="Editar Jogador">
+        <formulario id="formEditar" css="" action="#" method="put" enctype="multipart/form-data" token="{{ csrf_token() }}">
             <div class="form-group">
                 <label for="nome">Nome</label>
                 <input type="text" class="form-control" id="nome" name="nome" v-model="$store.state.item.nome" placeholder="Nome">

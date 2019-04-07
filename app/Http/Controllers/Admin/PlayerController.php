@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Player;
+
 class PlayerController extends Controller
 {
     /**
@@ -20,10 +22,7 @@ class PlayerController extends Controller
             ['titulo' => 'Lista de Jogadores', "url" => '']
         ]);
 
-        $listaPlayers = json_encode([
-            ['id' => 1, "nome" => 'Lucas Lisboa'],
-            ['id' => 2, "nome" => 'Bruna Lisboa']
-        ]);
+        $listaPlayers = json_encode(Player::select('id','nome')->get());
 
         //Chamar a View e enviar o conteúdo das variáveis para view
         return view('admin.players.index', compact('listaMigalhas', 'listaPlayers'));
@@ -47,7 +46,10 @@ class PlayerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->all());
+        $data = $request->all();
+        Player::create($data);
+        return redirect()->back();
     }
 
     /**
