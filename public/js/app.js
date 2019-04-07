@@ -46842,6 +46842,7 @@ var render = function() {
                               ? _c("modal-link", {
                                   attrs: {
                                     item: item,
+                                    url: _vm.detalhe,
                                     tipo: "link",
                                     nome: "detalhe",
                                     titulo: "Detalhe |",
@@ -46860,6 +46861,7 @@ var render = function() {
                               ? _c("modal-link", {
                                   attrs: {
                                     item: item,
+                                    url: _vm.editar,
                                     tipo: "link",
                                     nome: "editar",
                                     titulo: "Editar |",
@@ -46898,7 +46900,9 @@ var render = function() {
                             _vm.detalhe && _vm.modal
                               ? _c("modal-link", {
                                   attrs: {
+                                    item: item,
                                     tipo: "link",
+                                    url: _vm.detalhe,
                                     nome: "detalhe",
                                     titulo: "Detalhe |",
                                     css: ""
@@ -46915,7 +46919,9 @@ var render = function() {
                             _vm.editar && _vm.modal
                               ? _c("modal-link", {
                                   attrs: {
+                                    item: item,
                                     tipo: "link",
+                                    url: _vm.editar,
                                     nome: "editar",
                                     titulo: "Editar |",
                                     css: ""
@@ -46946,7 +46952,9 @@ var render = function() {
                             _vm.detalhe && _vm.modal
                               ? _c("modal-link", {
                                   attrs: {
+                                    item: item,
                                     tipo: "link",
+                                    url: _vm.detalhe,
                                     nome: "detalhe",
                                     titulo: "Detalhe |",
                                     css: ""
@@ -46963,7 +46971,9 @@ var render = function() {
                             _vm.editar && _vm.modal
                               ? _c("modal-link", {
                                   attrs: {
+                                    item: item,
                                     tipo: "link",
+                                    url: _vm.editar,
                                     nome: "editar",
                                     titulo: "Editar",
                                     css: ""
@@ -47330,11 +47340,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['tipo', 'nome', 'titulo', 'css', 'item'],
+    props: ['tipo', 'nome', 'titulo', 'css', 'item', 'url'],
     methods: {
         preencheFormulario: function preencheFormulario() {
+            var _this = this;
+
+            axios.get(this.url + this.item.id).then(function (response) {
+                _this.$store.commit('setItem', response.data);
+            });
+
             //Atualizar objeto
-            this.$store.commit('setItem', this.item);
+            //this.$store.commit('setItem', this.item);
         }
     }
 });

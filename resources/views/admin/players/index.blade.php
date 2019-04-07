@@ -2,6 +2,16 @@
 
 @section('content')
     <pagina tamanho="10">
+
+        @if($errors->all())
+            <div class="alert alert-danger alert-dismissible text-center" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @foreach ($errors->all() as $key => $value)
+                    <li><strong>{{$value}}</strong></li>
+                @endforeach
+            </div>
+        @endif
+
         <painel titulo="Lista de Jogadores" cor="blue">
             <migalhas v-bind:lista="{{ $listaMigalhas }}"></migalhas>
 
@@ -10,8 +20,8 @@
                     v-bind:itens="{{ $listaPlayers }}"
                     ordem="desc" ordemcol="1"
                     criar="#criar"
-                    detalhe="#detalhe"
-                    editar="#editar"
+                    detalhe="/admin/players/"
+                    editar="/admin/players/"
                     eliminar="#eliminar"
                     token="7887522323"
                     modal="sim"
@@ -25,7 +35,7 @@
 
             <div class="form-group">
                 <label for="nome">Nome</label>
-                <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome">
+                <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" value="{{ old('nome') }}">
             </div>
 
         </formulario>
@@ -35,7 +45,7 @@
     </modal>
 
     <modal nome="editar" titulo="Editar Jogador">
-        <formulario id="formEditar" css="" action="#" method="put" enctype="multipart/form-data" token="{{ csrf_token() }}">
+        <formulario id="formEditar" css="" v-bind:action="'/admin/players/' + $store.state.item.id" method="put" enctype="multipart/form-data" token="{{ csrf_token() }}">
             <div class="form-group">
                 <label for="nome">Nome</label>
                 <input type="text" class="form-control" id="nome" name="nome" v-model="$store.state.item.nome" placeholder="Nome">

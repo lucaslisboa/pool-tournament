@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -46,8 +47,15 @@ class PlayerController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
         $data = $request->all();
+        $validacao = \Validator::make($data, [
+            "nome" => "required",
+        ]);
+
+        if ($validacao->fails()) {
+            return redirect()->back()->withErrors($validacao)->withInput();
+        }
+
         Player::create($data);
         return redirect()->back();
     }
@@ -60,7 +68,7 @@ class PlayerController extends Controller
      */
     public function show($id)
     {
-        //
+        return Player::find($id);
     }
 
     /**
@@ -83,7 +91,17 @@ class PlayerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $validacao = \Validator::make($data, [
+            "nome" => "required",
+        ]);
+
+        if ($validacao->fails()) {
+            return redirect()->back()->withErrors($validacao)->withInput();
+        }
+
+        Player::find($id)->update($data);
+        return redirect()->back();
     }
 
     /**
