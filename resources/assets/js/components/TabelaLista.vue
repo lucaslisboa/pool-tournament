@@ -22,7 +22,7 @@
 
                 <td v-if="detalhe || editar || eliminar">
 
-                    <form v-if="eliminar && token" v-bind:id="index" v-bind:action="eliminar" method="post">
+                    <form v-if="eliminar && token" v-bind:id="index" v-bind:action="eliminar + item.id" method="post">
 
                         <input type="hidden" name="_method" value="DELETE">
                         <input type="hidden" name="_token" v-bind:value="token">

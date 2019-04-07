@@ -46814,7 +46814,7 @@ var render = function() {
                           {
                             attrs: {
                               id: index,
-                              action: _vm.eliminar,
+                              action: _vm.eliminar + item.id,
                               method: "post"
                             }
                           },

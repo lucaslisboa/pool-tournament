@@ -22,8 +22,8 @@
                     criar="#criar"
                     detalhe="/admin/players/"
                     editar="/admin/players/"
-                    eliminar="#eliminar"
-                    token="7887522323"
+                    eliminar="/admin/players/"
+                    token="{{ csrf_token() }}"
                     modal="sim"
             ></tabela-lista>
         </painel>
