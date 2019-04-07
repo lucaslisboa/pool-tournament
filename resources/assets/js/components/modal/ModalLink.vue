@@ -1,9 +1,9 @@
 <template>
-    <div class="">
+    <span class="">
         <button v-if="!tipo || (tipo != 'button' && tipo != 'link')" type="button" v-bind:class="css || 'btn btn-primary'" data-toggle="modal" v-bind:data-target="'#' + nome">{{ titulo }}</button>
         <button v-if="tipo == 'button'" type="button" v-bind:class="css || 'btn btn-primary'" data-toggle="modal" v-bind:data-target="'#' + nome">{{ titulo }}</button>
         <a href="#" v-if="tipo == 'link'" v-bind:class="css || ''" data-toggle="modal" v-bind:data-target="'#' + nome">{{ titulo }}</a>
-    </div>
+    </span>
 </template>
 
 <script>

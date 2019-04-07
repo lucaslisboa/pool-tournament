@@ -5,26 +5,24 @@
         <painel titulo="Lista de Jogadores" cor="blue">
             <migalhas v-bind:lista="{{ $listaMigalhas }}"></migalhas>
 
-            <modal-link tipo="link" nome="meuModalTeste" titulo="Criar" css=""></modal-link>
-
             <tabela-lista
                     v-bind:titulos="['#','Nome']"
-                    v-bind:itens="[[1, 'Lucas Lisboa'],[2, 'Bruna Lisboa']]"
+                    v-bind:itens="{{ $listaPlayers }}"
                     ordem="desc" ordemcol="1"
                     criar="#criar"
                     detalhe="#detalhe"
                     editar="#editar"
                     eliminar="#eliminar"
                     token="7887522323"
+                    modal="sim"
             ></tabela-lista>
         </painel>
     </pagina>
 
 
-    <modal nome="meuModalTeste">
-
+    <modal nome="adicionar">
         <painel titulo="Adicionar">
-            <formulario css="" action="#" method="put" enctype="multipart/form-data" token="12345">
+            <formulario css="" action="#" method="post" enctype="multipart/form-data" token="">
 
                 <div class="form-group">
                     <label for="nome">Nome</label>
@@ -34,6 +32,20 @@
 
             </formulario>
         </painel>
-
     </modal>
+
+    <modal nome="editar">
+        <painel titulo="Editar">
+            <formulario css="" action="#" method="put" enctype="multipart/form-data" token="12345">
+
+                <div class="form-group">
+                    <label for="nome">Nome</label>
+                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome">
+                </div>
+                <button class="btn btn-info">Atualizar</button>
+
+            </formulario>
+        </painel>
+    </modal>
+
 @endsection

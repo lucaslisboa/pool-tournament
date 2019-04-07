@@ -2,7 +2,8 @@
     <div>
 
         <div class="form-inline">
-            <a v-if="criar" v-bind:href="criar">Criar</a>
+            <a v-if="criar && !modal" v-bind:href="criar">Criar</a>
+            <modal-link v-if="criar && modal" tipo="link" nome="adicionar" titulo="Criar" css=""></modal-link>
             <div class="form-group pull-right">
                 <input type="search" class="form-control" placeholder="Buscar" v-model="buscar">
             </div>
@@ -27,7 +28,8 @@
                         <input type="hidden" name="_token" v-bind:value="token">
 
                         <a v-if="detalhe" v-bind:href="detalhe">Detalhe |</a>
-                        <a v-if="editar" v-bind:href="editar">Editar |</a>
+                        <a v-if="editar && !modal" v-bind:href="editar">Editar |</a>
+                        <modal-link v-if="editar && modal" tipo="link" nome="editar" titulo="Editar |" css=""></modal-link>
 
                         <a href="#" v-on:click="executaForm(index)">Eliminar</a>
 
@@ -35,13 +37,15 @@
 
                     <span v-if="!token">
                         <a v-if="detalhe" v-bind:href="detalhe">Detalhe |</a>
-                        <a v-if="editar" v-bind:href="editar">Editar |</a>
+                        <a v-if="editar && !modal" v-bind:href="editar">Editar |</a>
+                        <modal-link v-if="editar && modal" tipo="link" nome="editar" titulo="Editar |" css=""></modal-link>
                         <a v-if="eliminar" v-bind:href="eliminar">Eliminar</a>
                     </span>
 
                     <span v-if="token && !eliminar">
                         <a v-if="detalhe" v-bind:href="detalhe">Detalhe |</a>
-                        <a v-if="editar" v-bind:href="editar">Editar</a>
+                        <a v-if="editar && !modal" v-bind:href="editar">Editar</a>
+                        <modal-link v-if="editar && modal" tipo="link" nome="editar" titulo="Editar" css=""></modal-link>
                     </span>
 
 
@@ -54,7 +58,7 @@
 
 <script>
     export default {
-        props: ['titulos','itens','ordem','ordemcol','criar','detalhe','editar','eliminar','token'],
+        props: ['titulos','itens','ordem','ordemcol','criar','detalhe','editar','eliminar','token','modal'],
         data: function() {
             return {
                 buscar: '',
@@ -91,36 +95,41 @@
                 //ordem crescente
                 if (ordem == "asc") {
                     this.itens.sort(function(a, b) {
-                        if (a[ordemCol] > b[ordemCol]) { return 1; }
-                        if (a[ordemCol] < b[ordemCol]) { return -1; }
+                        if (Object.values(a)[ordemCol] > Object.values(b)[ordemCol]) { return 1; }
+                        if (Object.values(a)[ordemCol] < Object.values(b)[ordemCol]) { return -1; }
                         return 0;
                     });
                 } else {
                     //ordem decrescente
                     this.itens.sort(function(a, b) {
-                        if (a[ordemCol] < b[ordemCol]) { return 1; }
-                        if (a[ordemCol] > b[ordemCol]) { return -1; }
+                        if (Object.values(a)[ordemCol] < Object.values(b)[ordemCol]) { return 1; }
+                        if (Object.values(a)[ordemCol] > Object.values(b)[ordemCol]) { return -1; }
                         return 0;
                     });
                 }
                 //Fim lógica de ordenação por tag
 
-                //Filtragem da lista
-                return this.itens.filter(response => {
+                //Se foi digitado algo no campo busca
+                if (this.buscar) {
+                    //Filtragem da lista
+                    return this.itens.filter(response => {
 
-                    //filtro em cada campo da lista de itens
-                    for (let k = 0 ; k < response.length ; k++) {
+                        //filtro em cada campo da lista de itens
+                        for (let k = 0 ; k < response.length ; k++) {
 
-                        //verificação se o que foi digitado no campo buscar existe na lista de itens
-                        //garantir que o valor pego da lista de itens será transformado para string
-                        if ((response[k] + "").toLowerCase().indexOf(this.buscar.toLowerCase()) >= 0) {
-                            return true;
+                            //verificação se o que foi digitado no campo buscar existe na lista de itens
+                            //garantir que o valor pego da lista de itens será transformado para string
+                            if ((response[k] + "").toLowerCase().indexOf(this.buscar.toLowerCase()) >= 0) {
+                                return true;
+                            }
                         }
-                    }
 
-                    return false;
+                        return false;
 
-                });
+                    });
+                }
+
+
 
 
                 return this.itens;

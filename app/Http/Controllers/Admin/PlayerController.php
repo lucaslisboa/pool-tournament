@@ -19,7 +19,14 @@ class PlayerController extends Controller
             ['titulo' => 'Início', "url" => route('home')],
             ['titulo' => 'Lista de Jogadores', "url" => '']
         ]);
-        return view('admin.players.index', compact('listaMigalhas'));
+
+        $listaPlayers = json_encode([
+            ['id' => 1, "nome" => 'Lucas Lisboa'],
+            ['id' => 2, "nome" => 'Bruna Lisboa']
+        ]);
+
+        //Chamar a View e enviar o conteúdo das variáveis para view
+        return view('admin.players.index', compact('listaMigalhas', 'listaPlayers'));
     }
 
     /**
