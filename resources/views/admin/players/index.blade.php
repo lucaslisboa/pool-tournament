@@ -20,32 +20,36 @@
     </pagina>
 
 
-    <modal nome="adicionar">
-        <painel titulo="Adicionar">
-            <formulario css="" action="#" method="post" enctype="multipart/form-data" token="">
+    <modal nome="adicionar" titulo="Adicionar">
+        <formulario id="formAdicionar" css="" action="#" method="post" enctype="multipart/form-data" token="">
 
-                <div class="form-group">
-                    <label for="nome">Nome</label>
-                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome">
-                </div>
-                <button class="btn btn-info">Adicionar</button>
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome">
+            </div>
 
-            </formulario>
-        </painel>
+        </formulario>
+        <span slot="botoes">
+            <button form="formAdicionar" class="btn btn-info">Adicionar</button>
+        </span>
     </modal>
 
-    <modal nome="editar">
-        <painel titulo="Editar">
-            <formulario css="" action="#" method="put" enctype="multipart/form-data" token="12345">
+    <modal nome="editar" titulo="Editar">
+        <formulario id="formEditar" css="" action="#" method="put" enctype="multipart/form-data" token="12345">
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" v-model="$store.state.item.nome" placeholder="Nome">
+            </div>
+        </formulario>
 
-                <div class="form-group">
-                    <label for="nome">Nome</label>
-                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome">
-                </div>
-                <button class="btn btn-info">Atualizar</button>
+        <span slot="botoes">
+            <button form="formEditar" class="btn btn-info">Atualizar</button>
+        </span>
+    </modal>
 
-            </formulario>
-        </painel>
+    <modal nome="detalhe" v-bind:titulo="'Detalhe (' + $store.state.item.nome + ')'">
+        <label for="nome">Nome</label>
+        <p>@{{$store.state.item.nome}}</p>
     </modal>
 
 @endsection

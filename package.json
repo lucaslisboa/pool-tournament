@@ -19,6 +19,7 @@
     "vue": "^2.5.7"
   },
   "dependencies": {
-    "imagemin-pngquant": "^5.0.1"
+    "imagemin-pngquant": "^5.0.1",
+    "vuex": "^3.0.1"
   }
 }

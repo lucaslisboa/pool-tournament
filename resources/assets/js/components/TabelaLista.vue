@@ -27,23 +27,29 @@
                         <input type="hidden" name="_method" value="DELETE">
                         <input type="hidden" name="_token" v-bind:value="token">
 
-                        <a v-if="detalhe" v-bind:href="detalhe">Detalhe |</a>
+                        <a v-if="detalhe && !modal" v-bind:href="detalhe">Detalhe |</a>
+                        <modal-link v-if="detalhe && modal" v-bind:item="item" tipo="link" nome="detalhe" titulo="Detalhe |" css=""></modal-link>
+
                         <a v-if="editar && !modal" v-bind:href="editar">Editar |</a>
-                        <modal-link v-if="editar && modal" tipo="link" nome="editar" titulo="Editar |" css=""></modal-link>
+                        <modal-link v-if="editar && modal" v-bind:item="item" tipo="link" nome="editar" titulo="Editar |" css=""></modal-link>
 
                         <a href="#" v-on:click="executaForm(index)">Eliminar</a>
 
                     </form>
 
                     <span v-if="!token">
-                        <a v-if="detalhe" v-bind:href="detalhe">Detalhe |</a>
+                        <a v-if="detalhe && !modal" v-bind:href="detalhe">Detalhe |</a>
+                        <modal-link v-if="detalhe && modal" tipo="link" nome="detalhe" titulo="Detalhe |" css=""></modal-link>
+
                         <a v-if="editar && !modal" v-bind:href="editar">Editar |</a>
                         <modal-link v-if="editar && modal" tipo="link" nome="editar" titulo="Editar |" css=""></modal-link>
                         <a v-if="eliminar" v-bind:href="eliminar">Eliminar</a>
                     </span>
 
                     <span v-if="token && !eliminar">
-                        <a v-if="detalhe" v-bind:href="detalhe">Detalhe |</a>
+                        <a v-if="detalhe && !modal" v-bind:href="detalhe">Detalhe |</a>
+                        <modal-link v-if="detalhe && modal" tipo="link" nome="detalhe" titulo="Detalhe |" css=""></modal-link>
+
                         <a v-if="editar && !modal" v-bind:href="editar">Editar</a>
                         <modal-link v-if="editar && modal" tipo="link" nome="editar" titulo="Editar" css=""></modal-link>
                     </span>
@@ -113,6 +119,8 @@
                 if (this.buscar) {
                     //Filtragem da lista
                     return this.itens.filter(response => {
+
+                        response = Object.values(response);
 
                         //filtro em cada campo da lista de itens
                         for (let k = 0 ; k < response.length ; k++) {
