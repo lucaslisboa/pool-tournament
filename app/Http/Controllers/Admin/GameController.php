@@ -26,8 +26,19 @@ class GameController extends Controller
 
         $listaModelo = Game::select('id','data_jogo','pontuacao_jogador_1','pontuacao_jogador_2','player_id_1','player_id_2')->paginate(2);
 
+        foreach ($listaModelo as $key => $value) {
+            /*$value->player_id_1 = Player::find($value->player_id_1)->nome;
+            $value->player_id_2 = Player::find($value->player_id_2)->nome;*/
+
+            $value->player_id_1 = $value->playerOne->nome;
+            unset($value->playerOne);
+
+            $value->player_id_2 = $value->playerTwo->nome;
+            unset($value->playerTwo);
+        }
+
         //Chamar a View e enviar o conteúdo das variáveis para view
-        return view('admin.gamers.index', compact('listaMigalhas', 'listaModelo'));
+        return view('admin.games.index', compact('listaMigalhas', 'listaModelo'));
     }
 
     /**

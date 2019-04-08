@@ -13,8 +13,12 @@ class Player extends Model
 
     protected $dates = ['deleted_at'];
 
-    public function games() {
+    /*public function games() {
         return $this->hasMany('App\Game');
+    } */
+
+    public function game() {
+        return $this->belongsTo('App\Game');
     }
 
 }
