@@ -49,7 +49,7 @@ class PlayerController extends Controller
     {
         $data = $request->all();
         $validacao = \Validator::make($data, [
-            "nome" => "required",
+            "nome" => "required|string|min:3|max:100",
         ]);
 
         if ($validacao->fails()) {

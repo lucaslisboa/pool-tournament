@@ -12,4 +12,9 @@ class Player extends Model
     protected $fillable = ['nome'];
 
     protected $dates = ['deleted_at'];
+
+    public function games() {
+        return $this->hasMany('App\Game');
+    }
+
 }
