@@ -17,7 +17,7 @@
 
             <tabela-lista
                     v-bind:titulos="['#','Nome']"
-                    v-bind:itens="{{ $listaPlayers }}"
+                    v-bind:itens="{{ json_encode($listaPlayers) }}"
                     ordem="desc" ordemcol="1"
                     criar="#criar"
                     detalhe="/admin/players/"
@@ -26,6 +26,9 @@
                     token="{{ csrf_token() }}"
                     modal="sim"
             ></tabela-lista>
+            <div align="center" class="paginacao">
+                {{ $listaPlayers }}
+            </div>
         </painel>
     </pagina>
 

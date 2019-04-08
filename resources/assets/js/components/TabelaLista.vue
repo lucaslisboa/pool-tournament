@@ -90,6 +90,9 @@
             //carrega a lista
             lista: function() {
 
+                //Paginação
+                let lista = this.itens.data;
+
                 //Início lógica de ordenação por tag
                 let ordem = this.ordemAux;
                 let ordemCol = this.ordemColAux;
@@ -100,14 +103,14 @@
 
                 //ordem crescente
                 if (ordem == "asc") {
-                    this.itens.sort(function(a, b) {
+                    lista.sort(function(a, b) {
                         if (Object.values(a)[ordemCol] > Object.values(b)[ordemCol]) { return 1; }
                         if (Object.values(a)[ordemCol] < Object.values(b)[ordemCol]) { return -1; }
                         return 0;
                     });
                 } else {
                     //ordem decrescente
-                    this.itens.sort(function(a, b) {
+                    lista.sort(function(a, b) {
                         if (Object.values(a)[ordemCol] < Object.values(b)[ordemCol]) { return 1; }
                         if (Object.values(a)[ordemCol] > Object.values(b)[ordemCol]) { return -1; }
                         return 0;
@@ -118,7 +121,7 @@
                 //Se foi digitado algo no campo busca
                 if (this.buscar) {
                     //Filtragem da lista
-                    return this.itens.filter(response => {
+                    return lista.filter(response => {
 
                         response = Object.values(response);
 
@@ -140,7 +143,7 @@
 
 
 
-                return this.itens;
+                return lista;
             }
         }
     }

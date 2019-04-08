@@ -46654,6 +46654,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         lista: function lista() {
             var _this = this;
 
+            //Paginação
+            var lista = this.itens.data;
+
             //Início lógica de ordenação por tag
             var ordem = this.ordemAux;
             var ordemCol = this.ordemColAux;
@@ -46664,7 +46667,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             //ordem crescente
             if (ordem == "asc") {
-                this.itens.sort(function (a, b) {
+                lista.sort(function (a, b) {
                     if (Object.values(a)[ordemCol] > Object.values(b)[ordemCol]) {
                         return 1;
                     }
@@ -46675,7 +46678,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 });
             } else {
                 //ordem decrescente
-                this.itens.sort(function (a, b) {
+                lista.sort(function (a, b) {
                     if (Object.values(a)[ordemCol] < Object.values(b)[ordemCol]) {
                         return 1;
                     }
@@ -46690,7 +46693,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             //Se foi digitado algo no campo busca
             if (this.buscar) {
                 //Filtragem da lista
-                return this.itens.filter(function (response) {
+                return lista.filter(function (response) {
 
                     response = Object.values(response);
 
@@ -46708,7 +46711,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 });
             }
 
-            return this.itens;
+            return lista;
         }
     }
 });

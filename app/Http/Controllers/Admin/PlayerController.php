@@ -23,7 +23,7 @@ class PlayerController extends Controller
             ['titulo' => 'Lista de Jogadores', "url" => '']
         ]);
 
-        $listaPlayers = json_encode(Player::select('id','nome')->get());
+        $listaPlayers = Player::select('id','nome')->paginate(2);
 
         //Chamar a View e enviar o conteúdo das variáveis para view
         return view('admin.players.index', compact('listaMigalhas', 'listaPlayers'));
